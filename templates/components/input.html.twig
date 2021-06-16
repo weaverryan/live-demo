@@ -1,0 +1,15 @@
+<label class="form-label">
+    {{ this.label }}
+    <input
+        class="form-control{{ this.hasErrors ? ' is-invalid' }}"
+        type="{{ this.type }}"
+        value="{{ this.value }}"
+    />
+    {% if this.hasErrors %}
+        <div class="invalid-feedback">
+            {% for error in this.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</label>

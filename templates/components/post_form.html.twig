@@ -1,0 +1,37 @@
+<div
+    {{ init_live_component(this) }}
+    {#
+        Automatically catch all "change" events from the fields
+        below and re-render the component.
+        Another common value is "input", which renders whenever
+        the "input" event fires (e.g. as you type in a field).
+    #}
+    data-action="change->live#update"
+>
+    {{ form_start(this.form) }}
+        {{ form_row(this.form.title) }}
+
+        {{ form_row(this.form.slug, {
+            help: 'If blank, this will be auto-generated.'~this.alreadyUsedSlugMessage
+        }) }}
+
+        {{ component('form_markdown_textarea', {
+            form: this.form,
+            post: this.post
+        }) }}
+
+        <button
+            class="btn btn-primary"
+            data-loading="addAttribute(disabled)"
+            formnovalidate
+        >{{ this.buttonLabel }}</button>
+
+        <button
+            type="button"
+            class="btn btn-secondary"
+            data-action="live#action"
+            data-action-name="prevent|save"
+            data-loading="addAttribute(disabled)"
+        >Submit via live action</button>
+    {{ form_end(this.form) }}
+</div>

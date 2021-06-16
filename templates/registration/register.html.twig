@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h1>Register</h1>
+
+    {{ component('registration_form', {
+        form: registrationForm
+    }) }}
+{% endblock %}

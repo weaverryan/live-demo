@@ -1,0 +1,16 @@
+<div
+    {{ init_live_component(this) }}
+    {% if this.pollLength %}
+        data-poll="delay({{ this.pollLength }})|$render"
+    {% else %}
+        data-poll
+    {% endif %}
+>
+    {#
+        data-poll="750"
+        data-poll="delay(750)|save"
+    #}
+    Time: {{ this.now }}
+    <br>
+    <textarea>try modifying me... i won't get replaced!</textarea>
+</div>

@@ -1,0 +1,7 @@
+<div {{ init_live_component(this) }}>
+    Created: {{ this.created|date('r') }}<br>
+    Last Refreshed: {{ date()|date('r') }}<br>
+    <button
+        data-action="live#$render"
+    >Refresh</button>
+</div>

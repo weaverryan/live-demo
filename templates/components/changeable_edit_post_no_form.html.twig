@@ -1,0 +1,60 @@
+<div {{ init_live_component(this) }}>
+    <div
+        data-loading="addClass(low-opacity)"
+    >
+        Post: <select
+            data-model="post"
+            data-action="live#update"
+        >
+            {% for otherPost in this.allPosts %}
+                <option
+                    value="{{ otherPost.id }}"
+                    {{ otherPost.id == this.post.id ? 'selected': '' }}
+                >{{ otherPost.title }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        {#
+            Shows off how you can wrap elements in a form so that, on enter
+            of a field, the form submits.
+
+            Though, in general, this isn't a great practice: people should
+            build *real*, functional, normal forms and use the live components
+            system to augment them (e.g. validation on blur) vs handling
+            the submit action.
+        #}
+        <form
+            data-action="live#action"
+            data-action-name="prevent|save"
+        >
+            Post title: <input
+                type="text"
+                data-model="post.title"
+                data-action="live#updateDefer"
+                value="{{ this.post.title }}"
+            ><br>
+            Post Title: {{ this.post.title }}<br>
+            Last Refreshed: {{ date()|date('r') }}<br>
+            <button
+                data-action="live#$render"
+            >Refresh</button>
+
+            <button
+                data-action="live#action"
+                data-action-name="save"
+                data-loading="addAttribute(disabled)"
+            >Save</button>
+        </form>
+
+        <form onsubmit="alert('the form submit was not prevented!')">
+            <button
+                data-action="live#action"
+                data-action-name="prevent|debounce(1000)|save"
+            >Save + prevent default + debounce 1000ms</button>
+            <br>
+            (if you click this over and over again, the debounce will
+            prevent it from *ever* running)
+        </form>
+    </div>
+</div>

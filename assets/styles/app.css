@@ -1,0 +1,14 @@
+@import "~bootstrap";
+@import '../../vendor/scrivo/highlight.php/styles/default.css';
+@import '../../vendor/scrivo/highlight.php/styles/night-owl.css';
+
+.markdown-preview {
+    padding: 30px;
+    background-color: lightcyan;
+}
+.markdown-preview.bg-maroon {
+    background-color: #E8E0FF;
+}
+.low-opacity {
+    opacity: .2;
+}

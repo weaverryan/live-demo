@@ -1,0 +1,12 @@
+<div {{ init_live_component(this) }}>
+    {{ form_row(this.form.content, {
+        attr: {
+            'data-action': 'live#update',
+        },
+        help: 'Type markdown here and see its preview'
+    }) }}
+
+    <div class="markdown-preview">
+        {{ field_value(this.form.content)|markdown_to_html }}
+    </div>
+</div>

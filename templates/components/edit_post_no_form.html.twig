@@ -1,0 +1,73 @@
+<div {{ init_live_component(this) }}>
+    <div>
+        Post Id: {{ this.post.id }}<br>
+
+        <div class="mb-3">
+            <label for="edit_post_title" class="form-label">Title</label>
+            <div class="input-group">
+                <input
+                    type="text"
+                    data-model="post.title"
+                    data-action="blur->live#update"
+                    class="form-control {{ this.getError('post.title') ? 'is-invalid' : '' }}"
+                    value="{{ this.post.title }}"
+                    id="edit_post_title"
+                >
+                {% if this.getError('post.title') %}
+                    <div class="invalid-feedback">
+                        {{ this.getError('post.title').message }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="edit_post_content" class="form-label">Content</label>
+            <div class="input-group">
+                <textarea
+                    data-model="post.content"
+                    data-action="blur->live#update"
+                    class="form-control {{ this.getError('post.content') ? 'is-invalid' : '' }}"
+                    style="width: 300px; height: 100px;"
+                    id="edit_post_content"
+                >{{ this.post.content }}</textarea>
+
+                {% if this.getError('post.content') %}
+                    <div class="invalid-feedback">
+                        {{ this.getError('post.content').message }}
+                    </div>
+                {% endif %}
+
+                <div class="form-text">Trying typing **markdown**!</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="markdown-preview mb-3" data-loading="addClass(low-opacity)">
+        <h3>{{ this.post.title }}</h3>
+        {{ this.post.content|markdown_to_html }}
+    </div>
+
+    {% if this.isSaved %}
+        <div class="alert alert-success">Saved!</div>
+    {% endif %}
+
+    <button
+        data-action="live#action"
+        data-action-name="save"
+        class="btn btn-primary btn-sm"
+    >Save</button>
+
+    <button
+        data-action="live#action"
+        data-action-name="debounce(1000)|save"
+        class="btn btn-primary btn-sm"
+    >Save + debounce 1000ms</button>
+    <br>
+    <small>
+        The 2nd button will wait 1000ms before executing. If you
+        click it repeatedly, it will still only trigger one time.
+        If you click this over and over again forever... the debounce
+        will  prevent it from *ever* running. Have fun!
+    </small>
+</div>

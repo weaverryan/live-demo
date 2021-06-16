@@ -1,0 +1,24 @@
+<div {{ init_live_component(this) }}>
+    <div class="mb-3">
+        <input
+            class="form-control"
+            type="text"
+            value="{{ this.value }}"
+            data-model="value"
+            data-action="live#update"
+        />
+    </div>
+    <div class="alert alert-info">
+        {{ this.prefixedValue }}
+    </div>
+
+    First rendered: {{ this.firstRenderedAt.format('H:i:s') }} <br>
+    Last rendered: {{ date().format('H:i:s') }}
+
+    <div>
+    <button
+        data-action="live#$render"
+        class="btn btn-primary"
+    >Force Rerender</button>
+    </div>
+</div>

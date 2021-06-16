@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Post{% endblock %}
+
+{% block body %}
+    <h1>Create new Post</h1>
+
+    {#
+        We're passing in "form", which is optional.
+        We're doing it so that, in case the form was just
+        submitted and validated in the controller, our
+        component will re-use the submitted form instead
+        of creating a new form with nor submitted data.
+    #}
+    {{ component('post_form', {
+        form: form
+    }) }}
+
+    <a href="{{ path('app_post_index') }}">back to list</a>
+{% endblock %}

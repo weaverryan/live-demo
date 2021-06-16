@@ -1,0 +1,24 @@
+<div
+    {{ init_live_component(this) }}
+    class="row gy-2 gx-3 align-items-center"
+>
+    <div class="col-auto">
+        <input
+            class="form-control"
+            type="text"
+            value="{{ this.message }}"
+            data-model="message"
+            data-action="live#updateDefer"
+            data-loading="delay|addAttribute(disabled)"
+        >
+    </div>
+    <div class="col-auto">
+        <button
+            class="btn btn-primary"
+            data-action="live#action"
+            data-action-name="add"
+        >
+            Add
+        </button>
+    </div>
+</div>

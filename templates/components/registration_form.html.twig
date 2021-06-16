@@ -1,0 +1,16 @@
+<div
+    {{ init_live_component(this) }}
+    data-action="change->live#update"
+>
+    {{ form_start(this.form, {
+        action: path('app_register'),
+    }) }}
+        {{ form_row(this.form.email) }}
+        {{ form_row(this.form.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(this.form.agreeTerms) }}
+
+        <button type="submit" class="btn btn-primary" formnovalidate>Register</button>
+    {{ form_end(this.form) }}
+</div>

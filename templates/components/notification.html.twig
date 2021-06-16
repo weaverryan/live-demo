@@ -1,0 +1,20 @@
+<div
+    {{ init_live_component(this) }}
+    data-poll
+>
+    Notifications ({{ this.notifications|length }})
+    <a href="#" class="btn btn-primary btn-sm" data-action="live#action" data-action-name="prevent|toggle">
+        {% if this.expanded %}Hide{% else %}Show{% endif %}
+    </a>
+    {% if this.expanded %}
+        {% if this.notifications|length %}
+            <ul>
+                {% for notification in this.notifications %}
+                    <li>{{ notification.message }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div><em>No notifications.</em></div>
+        {% endif %}
+    {% endif %}
+</div>

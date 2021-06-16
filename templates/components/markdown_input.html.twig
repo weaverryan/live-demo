@@ -1,0 +1,100 @@
+<div style="display: flex" {{ init_live_component(this) }}>
+    <div>
+        <strong>(type more to expand the box)</strong>
+        <p>Update on "input" (each key stroke)</p>
+        <label>
+            {{ this.label }}<br>
+            <textarea
+                name="{{ this.name }}"
+                data-model="value"
+                {#
+                    This triggers the "on input" behavior. In theory,
+                    we could try to make this happen automatically, without
+                    the user needing to do it. It's added here now for simplicity.
+                    And also, it gives the user full control over which event
+                    should be used to update it (e.g. "input", "change", "blur").
+                    See the other textareas for examples.
+                #}
+                data-action="live#update"
+                rows="{{ this.rows }}"
+            >
+                {{- this.value -}}
+            </textarea>
+        </label>
+
+        <p>Update on "blur"</p>
+        <label>
+            {{ this.label }}<br>
+            <textarea
+                name="{{ this.name }}"
+                data-model="value"
+                {#
+                    lazy: if you want to not update the model until "blur" instead
+                    of change", just change the event! This is native Stimulus:
+                #}
+                data-action="blur->live#update"
+                rows="{{ this.rows }}"
+            >
+                {{- this.value -}}
+            </textarea>
+        </label>
+
+        <p>Update in JavaScript, but don't re-render (until button click)</p>
+        <label>
+            {{ this.label }}<br>
+            <textarea
+                name="{{ this.name }}"
+                data-model="value"
+                {#
+                    defer: if you want to update the model on the client-side but
+                    not send it to the server until the next request, use updateDefer()
+                #}
+                data-action="live#updateDefer"
+                rows="{{ this.rows }}"
+                data-loading="addAttribute(disabled)"
+            >
+                {{- this.value -}}
+            </textarea>
+        </label>
+
+        <div>
+            <button
+                data-action="live#$render"
+            >Force Re-render</button>
+        </div>
+    </div>
+    <div>
+        {% if this.getError('value') %}
+            <div style="background-color: darkred; color: white; padding: 5px;">
+                <strong>VALIDATION ERROR ON "value"</strong>
+                <br/>
+                {{ this.getError('value').message }}
+            </div>
+        {% endif %}
+
+        <strong>Preview</strong>
+        <div class="alert alert-success">
+            <span data-loading>
+                Reloading...
+                <span data-loading="delay|show">(still working)</span>
+            </span>
+            <span data-loading="hide">
+                Loaded!
+            </span>
+        </div>
+        <div
+            class="markdown-preview"
+            data-loading="addClass(low-opacity bg-maroon)"
+        >
+            {{ this.value|markdown_to_html }}
+        </div>
+
+        <div>
+            <button
+                data-action="live#action"
+                data-action-name="save"
+            >"Save" (Trigger Validation)</button>
+        </div>
+    </div>
+</div>
+
