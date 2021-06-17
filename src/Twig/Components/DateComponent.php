@@ -6,11 +6,15 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\LiveComponentInterface;
 
 /**
- * @author Kevin Bond <kevinbond@gmail.com>
+ * A simple component that shows how DateTime objects are dehydrated.
  */
-final class Date implements LiveComponentInterface
+final class DateComponent implements LiveComponentInterface
 {
     /**
+     * A built-in hydrator handles converting this object into
+     * a date "string" for the frontend, then back into a DateTime
+     * object in the component.
+     *
      * @LiveProp
      */
     private \DateTimeInterface $created;

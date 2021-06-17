@@ -7,6 +7,7 @@ use App\Repository\PostRepository;
 use App\Twig\Components\AlertComponent;
 use App\Twig\Components\ChangeableEditPostNoFormComponent;
 use App\Twig\Components\ComplexInputComponent;
+use App\Twig\Components\DateComponent;
 use App\Twig\Components\EditPostNoFormComponent;
 use App\Twig\Components\InputComponent;
 use App\Twig\Components\AddNotificationComponent;
@@ -39,6 +40,7 @@ class MainController extends AbstractController
             ChangeableEditPostNoFormComponent::class,
             NotificationComponent::class,
             AddNotificationComponent::class,
+            DateComponent::class,
         ];
 
         $examples = $this->prepareExamples($examples);
