@@ -2,18 +2,21 @@
     <div
         data-loading="addClass(low-opacity)"
     >
-        Post: <select
+        Select a Post to edit:
+        <select
+            class="form-select"
             data-model="post"
             data-action="live#update"
         >
             {% for otherPost in this.allPosts %}
                 <option
                     value="{{ otherPost.id }}"
-                    {{ otherPost.id == this.post.id ? 'selected': '' }}
-                >{{ otherPost.title }}</option>
+                    {{ this.post and otherPost.id == this.post.id ? 'selected': '' }}
+                >{{ otherPost.title }} (id {{ otherPost.id }})</option>
             {% endfor %}
         </select>
-        <br>
+
+        <hr>
 
         {#
             Shows off how you can wrap elements in a form so that, on enter
@@ -28,33 +31,40 @@
             data-action="live#action"
             data-action-name="prevent|save"
         >
-            Post title: <input
-                type="text"
-                data-model="post.title"
-                data-action="live#updateDefer"
-                value="{{ this.post.title }}"
-            ><br>
-            Post Title: {{ this.post.title }}<br>
-            Last Refreshed: {{ date()|date('r') }}<br>
-            <button
-                data-action="live#$render"
-            >Refresh</button>
+            <div class="mb-3">
+                <label for="post-title" class="form-label">Title</label>
+                <input
+                    type="text"
+                    id="post-title"
+                    class="form-control"
+                    data-model="post.title"
+                    data-action="live#updateDefer"
+                    value="{{ this.post.title }}"
+                >
+            </div>
+
+            <div class="mb-3">
+                <label for="post-content" class="form-label">Content</label>
+                <textarea
+                    id="post-content"
+                    class="form-control"
+                    data-model="post.content"
+                    data-action="live#updateDefer"
+                >{{ this.post.content }}</textarea>
+            </div>
+
+            {% if this.isSaved %}
+                {{ component('alert', {
+                    'message': 'Post id '~this.post.id~' saved!'
+                }) }}
+            {% endif %}
 
             <button
                 data-action="live#action"
                 data-action-name="save"
                 data-loading="addAttribute(disabled)"
+                class="btn btn-primary"
             >Save</button>
-        </form>
-
-        <form onsubmit="alert('the form submit was not prevented!')">
-            <button
-                data-action="live#action"
-                data-action-name="prevent|debounce(1000)|save"
-            >Save + prevent default + debounce 1000ms</button>
-            <br>
-            (if you click this over and over again, the debounce will
-            prevent it from *ever* running)
         </form>
     </div>
 </div>

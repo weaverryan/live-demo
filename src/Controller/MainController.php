@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Repository\PostRepository;
+use App\Twig\Components\AlertComponent;
 use App\Twig\Components\ChangeableEditPostNoFormComponent;
 use App\Twig\Components\ComplexInputComponent;
 use App\Twig\Components\EditPostNoFormComponent;
@@ -30,6 +31,7 @@ class MainController extends AbstractController
         }
 
         $examples = [
+            AlertComponent::class,
             InputComponent::class,
             RegistrationFormComponent::class,
             ComplexInputComponent::class,

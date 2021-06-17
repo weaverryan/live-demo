@@ -12,10 +12,12 @@ use Symfony\UX\LiveComponent\Attribute\PostHydrate;
 use Symfony\UX\LiveComponent\LiveComponentInterface;
 
 /**
- * A simple "Post" form where you can change which Post is being edited.
+ * Choose which Post you want to edit, then update its data in a form!
  *
  * This includes a security check to prevent the user from trying to
- * edit a post they don't own.
+ * edit a post they don't own. If you try to change to any post whose id
+ * is <strong>divisible by 5</strong>, the component will fail to render (mimicking that
+ * you don't have access to change to this post).
  *
  * Note: this does note use a Symfony form.
  */
@@ -24,11 +26,13 @@ final class ChangeableEditPostNoFormComponent implements LiveComponentInterface
     /**
      * The post itself is CHANGEABLE
      *
-     * @LiveProp(writable=true, exposed={"title"})
+     * @LiveProp(writable=true, exposed={"title", "content"})
      */
-    public Post $post;
+    public ?Post $post = null;
 
     private PostRepository $postRepository;
+
+    public bool $isSaved = false;
 
     public function __construct(PostRepository $postRepository)
     {
@@ -51,7 +55,7 @@ final class ChangeableEditPostNoFormComponent implements LiveComponentInterface
      */
     public function postHydrate(): void
     {
-        if ($this->post->getId() % 5 === 0) {
+        if ($this->post && $this->post->getId() % 5 === 0) {
             throw new AccessDeniedException('You do not own this post!');
         }
     }
@@ -62,6 +66,7 @@ final class ChangeableEditPostNoFormComponent implements LiveComponentInterface
     public function save(EntityManagerInterface $entityManager)
     {
         $entityManager->flush();
+        $this->isSaved = true;
     }
 
     /**
