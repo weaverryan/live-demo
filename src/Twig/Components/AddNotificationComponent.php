@@ -11,6 +11,9 @@ use Symfony\UX\LiveComponent\LiveComponentInterface;
 /**
  * Adds a notification message.
  *
+ * After submitting the message, check the <code>NotificationComponent</code>
+ * above to see it!
+ *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
 final class AddNotificationComponent implements LiveComponentInterface
@@ -19,6 +22,8 @@ final class AddNotificationComponent implements LiveComponentInterface
      * @LiveProp(writable=true)
      */
     public string $message = '';
+
+    public bool $messageAdded = false;
 
     /**
      * @LiveAction
@@ -32,6 +37,7 @@ final class AddNotificationComponent implements LiveComponentInterface
         $em->flush();
 
         $this->message = '';
+        $this->messageAdded = true;
     }
 
     public static function getComponentName(): string

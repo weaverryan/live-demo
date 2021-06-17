@@ -3,7 +3,12 @@
     data-poll
 >
     Notifications ({{ this.notifications|length }})
-    <a href="#" class="btn btn-primary btn-sm" data-action="live#action" data-action-name="prevent|toggle">
+    <a
+        href="#"
+        class="btn btn-primary btn-sm"
+        data-action="live#action"
+        data-action-name="prevent|toggle"
+    >
         {% if this.expanded %}Hide{% else %}Show{% endif %}
     </a>
     {% if this.expanded %}

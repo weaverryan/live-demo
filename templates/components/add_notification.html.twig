@@ -1,6 +1,8 @@
-<div
+<form
     {{ init_live_component(this) }}
     class="row gy-2 gx-3 align-items-center"
+    data-action="live#action"
+    data-action-name="prevent|add"
 >
     <div class="col-auto">
         <input
@@ -15,10 +17,12 @@
     <div class="col-auto">
         <button
             class="btn btn-primary"
-            data-action="live#action"
-            data-action-name="add"
         >
             Add
         </button>
     </div>
-</div>
+
+    {% if this.messageAdded %}
+        {{ component('alert', { message: 'Notification Added!' }) }}
+    {% endif %}
+</form>

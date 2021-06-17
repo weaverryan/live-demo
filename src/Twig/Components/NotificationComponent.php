@@ -11,7 +11,8 @@ use Symfony\UX\LiveComponent\LiveComponentInterface;
 /**
  * Polls the server to look for new notifications.
  *
- * Add new notifications by running `bin/console create:notification "You're message"`
+ * Add new notifications by running <code>bin/console create:notification "You're message"</code>
+ * or by using the <code>AddNotificationComponent</code> below.
  */
 final class NotificationComponent implements LiveComponentInterface
 {
