@@ -5,6 +5,11 @@
 {% block body %}
     <h1>Post index</h1>
 
+    {{ component('alert', {
+        type: 'info',
+        message: 'This CRUD was generated with make:crud. The form uses the <code>post_form</code> component but submits to a normal controller.'
+    }) }}
+
     <table class="table">
         <thead>
             <tr>
