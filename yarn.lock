@@ -937,9 +937,11 @@
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
-"@symfony/ux-live-component@link:vendor/symfony/ux-live-component/assets":
-  version "0.0.0"
-  uid ""
+"@symfony/ux-live-component@file:vendor/symfony/ux-live-component/assets":
+  version "0.0.1"
+  dependencies:
+    core-js "^3.14.0"
+    morphdom "^2.6.1"
 
 "@symfony/webpack-encore@^1.0.0":
   version "1.4.0"
