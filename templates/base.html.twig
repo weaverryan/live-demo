@@ -12,36 +12,51 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path('app_homepage') }}">Live Components</a>
-                <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ path('app_post_index') }}">Post Admin</a>
+        <div class="row flex-nowrap">
+            <div class="col-auto col-3 bg-dark">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="{{ path('app_homepage') }}" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Live Components</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        {% for example in get_examples() %}
+                            <li
+                                class="nav-item nav-item-example mb-2"
+                            >
+                                <a href="{{ path('app_homepage') }}#example-{{ example.componentName }}" class="nav-link px-1 align-middle">
+                                    <div><code style="word-break: break-word">{{ example.shortClass }}</code></div>
+                                    {% if example.isLive %}
+                                        <span class="badge bg-primary rounded-pill" title="This component updates as your interact with it!">LIVE</span>
+                                    {% endif %}
+
+                                    <small class="mb-1">{{ example.classSummary|raw }}</small>
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <li
+                            class="nav-item nav-item-example mb-2"
+                        >
+                            <a href="{{ path('app_post_index') }}" class="nav-link px-1 align-middle">
+                                <div><code>Post Admin</code></div>
+
+                                <small class="mb-1">Admin CRUD that uses a component to render the form.</small>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>
 
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert alert-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
+            <div class="col py-3">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
 
-        <div class="container-fluid">
-            {% block body %}{% endblock %}
+                {% block body %}{% endblock %}
+            </div>
         </div>
     </body>
 </html>

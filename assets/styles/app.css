@@ -12,3 +12,6 @@
 .low-opacity {
     opacity: .2;
 }
+.nav-item-example a:hover {
+    background-color: #313539;
+}

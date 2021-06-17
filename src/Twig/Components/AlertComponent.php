@@ -13,15 +13,10 @@ use Symfony\UX\TwigComponent\ComponentInterface;
  */
 final class AlertComponent implements ComponentInterface
 {
-    /**
-     * @LiveProp
-     */
     public string $type = 'success';
-
-    /**
-     * @LiveProp
-     */
     public string $message;
+
+    public bool $escape = true;
 
     public static function getComponentName(): string
     {

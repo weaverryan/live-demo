@@ -1,3 +1,7 @@
 <div class="alert alert-{{ this.type }}">
-    {{ this.message }}
+    {% if this.escape %}
+        {{ this.message }}
+    {% else %}
+        {{ this.message|raw }}
+    {% endif %}
 </div>

@@ -3,70 +3,45 @@
 {% block title %}Live Twig Demo!{% endblock %}
 
 {% block body %}
-    <h1>Examples!</h1>
-
-    <div class="list-group">
-        {% for example in examples %}
-            <a
-                href="#example-{{ example.componentName }}"
-                class="list-group-item list-group-item-action"
-            >
-                <div class="d-flex w-100 justify-content-between">
-                    <code>{{ example.shortClass }}</code>
-
-                    {% if example.isLive %}
-                        <span class="badge bg-primary rounded-pill" title="This component updates as your interact with it!">LIVE</span>
-                    {% endif %}
-                </div>
-
-                <small class="mb-1">{{ example.classSummary|raw }}</small>
-            </a>
-        {% endfor %}
-    </div>
-
+    <h1>Twig & Live Component Examples</h1>
     <hr>
 
-    {% for example in examples %}
-        <h2><code>{{ example.shortClass }}</code></h2>
+    {% for example in get_examples() %}
+        <div id="example-{{ example.componentName }}">
+            <h2><code>{{ example.shortClass }}</code></h2>
+            <div class="row">
+                <div class="col-4">
+                    {{ include('examples/example_'~example.componentName~'.html.twig') }}
+                </div>
+                <div class="col-5">
+                    <p>
+                        {{ example.classSummary|raw }}
+                    </p>
 
-        <div class="row" id="example-{{ example.componentName }}">
-            <div class="col-4">
-                {{ include('examples/example_'~example.componentName~'.html.twig') }}
-            </div>
-            <div class="col-6">
-                <p>
-                    {{ example.classSummary|raw }}
-                </p>
+                    <p>
+                        {{ example.classDescription|raw }}
+                    </p>
 
-                <p>
-                    {{ example.classDescription|raw }}
-                </p>
+                    <details>
+                        <summary><code>{{ example.shortClass }}.php</code></summary>
 
-                <details>
-                    <summary><code>{{ example.shortClass }}.php</code></summary>
+                        <pre><code class="hljs php">{{ example_component_source(example.class) }}</code></pre>
+                    </details>
 
-                    <pre><code class="hljs php">{{ example_component_source(example.class) }}</code></pre>
-                </details>
+                    <details>
+                        <summary><code>{{ example.componentName }}.html.twig</code></summary>
 
-                <details>
-                    <summary><code>{{ example.componentName }}.html.twig</code></summary>
+                        <pre><code class="hljs twig">{{ example_component_template(example.componentName) }}</code></pre>
+                    </details>
 
-                    <pre><code class="hljs twig">{{ example_component_template(example.componentName) }}</code></pre>
-                </details>
-
-                <div>
-                    Usage
-                    <pre><code class="hljs twig">{{ example_include_example_source(example.componentName) }}</code></pre>
+                    <div>
+                        Usage
+                        <pre><code class="hljs twig">{{ example_include_example_source(example.componentName) }}</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
 
         <hr>
     {% endfor %}
-
-    <h2>Markdown live component</h2>
-    {{ component('markdown_input', { name: 'body', value: 'This is **working**.' }) }}
-
-    <h2>Second Markdown live component with custom label</h2>
-    {{ component('markdown_input', { name: 'body', value: 'This is **working**.', label: 'Custom Label' }) }}
 {% endblock %}

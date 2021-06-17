@@ -2,7 +2,19 @@
 
 namespace App;
 
+use App\Twig\Components\AddNotificationComponent;
+use App\Twig\Components\AlertComponent;
+use App\Twig\Components\ChangeableEditPostNoFormComponent;
+use App\Twig\Components\ComplexInputComponent;
+use App\Twig\Components\DateComponent;
+use App\Twig\Components\EditPostNoFormComponent;
+use App\Twig\Components\InputComponent;
+use App\Twig\Components\MarkdownInputComponent;
+use App\Twig\Components\NotificationComponent;
+use App\Twig\Components\RegistrationFormComponent;
 use Highlight\Highlighter;
+use phpDocumentor\Reflection\DocBlockFactory;
+use Symfony\UX\LiveComponent\LiveComponentInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -22,6 +34,7 @@ class DemoExtension extends AbstractExtension
             new TwigFunction('example_component_source', [$this, 'getComponentSource'], ['is_safe' => ['html']]),
             new TwigFunction('example_component_template', [$this, 'getComponentTemplate'], ['is_safe' => ['html']]),
             new TwigFunction('example_include_example_source', [$this, 'renderComponentExampleSource'], ['is_safe' => ['html']]),
+            new TwigFunction('get_examples', [$this, 'getExamples']),
         ];
     }
 
@@ -45,5 +58,47 @@ class DemoExtension extends AbstractExtension
         $source = file_get_contents(sprintf(__DIR__.'/../templates/examples/example_%s.html.twig', $name));
 
         return $this->highlighter->highlight('twig', $source)->value;
+    }
+
+    public function getExamples(): array
+    {
+        $examples = [
+            AlertComponent::class,
+            InputComponent::class,
+            RegistrationFormComponent::class,
+            ComplexInputComponent::class,
+            EditPostNoFormComponent::class,
+            ChangeableEditPostNoFormComponent::class,
+            NotificationComponent::class,
+            AddNotificationComponent::class,
+            DateComponent::class,
+            MarkdownInputComponent::class,
+        ];
+
+        return $this->prepareExamples($examples);
+    }
+
+    private function prepareExamples(array $examples)
+    {
+        $docBlockFactory = DocBlockFactory::createInstance();
+
+        $finalExamples = [];
+        foreach ($examples as $example) {
+            $reflectionClass = new \ReflectionClass($example);
+            $docBlock = $reflectionClass->getDocComment() ? $docBlockFactory->create($reflectionClass->getDocComment()) : null;
+            $classDescription = $docBlock ? $docBlock->getDescription() : '';
+            $classDescription = str_replace("\n\n", '<br><br>', $classDescription);
+
+            $finalExamples[] = [
+                'class' => $example,
+                'componentName' => $example::getComponentName(),
+                'shortClass' => $reflectionClass->getShortName(),
+                'classSummary' => $docBlock ? $docBlock->getSummary() : '',
+                'classDescription' => $classDescription,
+                'isLive' => in_array(LiveComponentInterface::class, class_implements($example), true),
+            ];
+        }
+
+        return $finalExamples;
     }
 }
