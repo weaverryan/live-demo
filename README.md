@@ -6,7 +6,6 @@
 git clone git@github.com:weaverryan/live-demo.git
 cd live-demo
 
-./clone.sh
 composer install
 yarn install --force
 yarn watch
