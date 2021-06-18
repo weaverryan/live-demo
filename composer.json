@@ -38,8 +38,8 @@
         "symfony/string": "5.3.*",
         "symfony/translation": "5.3.*",
         "symfony/twig-bundle": "^5.2",
-        "symfony/ux-live-component": "dev-main",
-        "symfony/ux-twig-component": "dev-main",
+        "symfony/ux-live-component": "@dev",
+        "symfony/ux-twig-component": "@dev",
         "symfony/validator": "5.3.*",
         "symfony/web-link": "5.3.*",
         "symfony/webpack-encore-bundle": "^1.11",
@@ -60,16 +60,6 @@
         "symfony/web-profiler-bundle": "^5.2",
         "zenstruck/foundry": "^1.11"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./ux/src/TwigComponent"
-        },
-        {
-            "type": "path",
-            "url": "./ux/src/LiveComponent"
-        }
-    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": {

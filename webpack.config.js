@@ -70,12 +70,6 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
-
-    .configureWatchOptions((options) => {
-        //delete options.ignored;
-        options.ignored = /node_modules([\\]+|\/)+(?!@symfony)/;
-        options.followSymlinks = true;
-    })
 ;
 
 module.exports = Encore.getWebpackConfig();
