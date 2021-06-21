@@ -2,7 +2,7 @@
 
 Hi there! You've stumbled across a treasure of demos for the
 the [TwigComponent](https://github.com/symfony/ux-twig-component)
-abd [LiveComponent](https://github.com/symfony/ux-live-component)
+and [LiveComponent](https://github.com/symfony/ux-live-component)
 libraries! Fun!
 
 If you want to see how this system works - including watching forms
