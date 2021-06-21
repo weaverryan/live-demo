@@ -14,8 +14,8 @@ use Symfony\UX\LiveComponent\ValidatableComponentTrait;
 /**
  * Renders a validatable form <strong>without</strong> the form component.
  *
- * After you edit each field (and "blur" to another field), the preview
- * is automatically updated. Both fields also have validation.
+ * After you edit each field ("blur" the title field, or just type into the
+ * textarea), the preview is automatically updated. Both fields also have validation.
  *
  * At the bottom, you can save the form via a <code>save()</code> action.
  *
