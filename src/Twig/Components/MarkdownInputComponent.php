@@ -3,8 +3,8 @@
 namespace App\Twig\Components;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\LiveComponentInterface;
 use Symfony\UX\LiveComponent\ValidatableComponentTrait;
 
 /**
@@ -14,30 +14,20 @@ use Symfony\UX\LiveComponent\ValidatableComponentTrait;
  * blank) (B) loading indicators for the preview and (C) the <code>textarea</code>
  * will expand if you type more text into it.
  */
-final class MarkdownInputComponent implements LiveComponentInterface
+#[AsLiveComponent('markdown_input')]
+final class MarkdownInputComponent
 {
     use ValidatableComponentTrait;
 
-    /**
-     * @LiveProp
-     */
+    #[LiveProp]
     public string $name;
 
-    /**
-     * @LiveProp
-     */
+    #[LiveProp]
     public string $label;
 
-    /**
-     * @LiveProp(writable=true)
-     * @Assert\NotBlank
-     */
+    #[LiveProp(writable: true)]
+    #[Assert\NotBlank]
     public string $value = '';
-
-    public static function getComponentName(): string
-    {
-        return 'markdown_input';
-    }
 
     public function mount(string $name): void
     {

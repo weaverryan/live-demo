@@ -6,10 +6,10 @@ use App\Entity\Post;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\PostHydrate;
-use Symfony\UX\LiveComponent\LiveComponentInterface;
 
 /**
  * Choose which Post you want to edit, then update its data in a form!
@@ -21,13 +21,13 @@ use Symfony\UX\LiveComponent\LiveComponentInterface;
  *
  * Note: this does note use a Symfony form.
  */
-final class ChangeableEditPostNoFormComponent implements LiveComponentInterface
+#[AsLiveComponent('changeable_edit_post_no_form')]
+final class ChangeableEditPostNoFormComponent
 {
     /**
      * The post itself is CHANGEABLE
-     *
-     * @LiveProp(writable=true, exposed={"title", "content"})
      */
+    #[LiveProp(writable: true, exposed: ['title', 'content'])]
     public ?Post $post = null;
 
     private PostRepository $postRepository;
@@ -50,9 +50,8 @@ final class ChangeableEditPostNoFormComponent implements LiveComponentInterface
      *
      * We fake that here: if the post's id is divisible by 5,
      * then we deny access.
-     *
-     * @PostHydrate()
      */
+    #[PostHydrate]
     public function postHydrate(): void
     {
         if ($this->post && $this->post->getId() % 5 === 0) {
@@ -60,9 +59,7 @@ final class ChangeableEditPostNoFormComponent implements LiveComponentInterface
         }
     }
 
-    /**
-     * @LiveAction()
-     */
+    #[LiveAction]
     public function save(EntityManagerInterface $entityManager)
     {
         $entityManager->flush();
@@ -75,10 +72,5 @@ final class ChangeableEditPostNoFormComponent implements LiveComponentInterface
     public function getAllPosts(): array
     {
         return $this->postRepository->findAll();
-    }
-
-    public static function getComponentName(): string
-    {
-        return 'changeable_edit_post_no_form';
     }
 }

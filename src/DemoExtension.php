@@ -14,7 +14,9 @@ use App\Twig\Components\NotificationComponent;
 use App\Twig\Components\RegistrationFormComponent;
 use Highlight\Highlighter;
 use phpDocumentor\Reflection\DocBlockFactory;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\LiveComponentInterface;
+use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -91,11 +93,11 @@ class DemoExtension extends AbstractExtension
 
             $finalExamples[] = [
                 'class' => $example,
-                'componentName' => $example::getComponentName(),
+                'componentName' => AsTwigComponent::forClass($example)->getName(),
                 'shortClass' => $reflectionClass->getShortName(),
                 'classSummary' => $docBlock ? $docBlock->getSummary() : '',
                 'classDescription' => $classDescription,
-                'isLive' => in_array(LiveComponentInterface::class, class_implements($example), true),
+                'isLive' => !empty($reflectionClass->getAttributes(AsLiveComponent::class)),
             ];
         }
 

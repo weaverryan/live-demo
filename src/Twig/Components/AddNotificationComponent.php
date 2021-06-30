@@ -4,9 +4,9 @@ namespace App\Twig\Components;
 
 use App\Entity\Notification;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\LiveComponentInterface;
 
 /**
  * Adds a notification message.
@@ -16,18 +16,15 @@ use Symfony\UX\LiveComponent\LiveComponentInterface;
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-final class AddNotificationComponent implements LiveComponentInterface
+#[AsLiveComponent('add_notification')]
+final class AddNotificationComponent
 {
-    /**
-     * @LiveProp(writable=true)
-     */
+    #[LiveProp(writable: true)]
     public string $message = '';
 
     public bool $messageAdded = false;
 
-    /**
-     * @LiveAction
-     */
+    #[LiveAction]
     public function add(EntityManagerInterface $em): void
     {
         $notification = new Notification();
@@ -38,10 +35,5 @@ final class AddNotificationComponent implements LiveComponentInterface
 
         $this->message = '';
         $this->messageAdded = true;
-    }
-
-    public static function getComponentName(): string
-    {
-        return 'add_notification';
     }
 }

@@ -2,27 +2,22 @@
 
 namespace App\Twig\Components;
 
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\LiveComponentInterface;
 
 /**
  * A simple component that shows how DateTime objects are dehydrated.
  */
-final class DateComponent implements LiveComponentInterface
+#[AsLiveComponent('date')]
+final class DateComponent
 {
     /**
      * A built-in hydrator handles converting this object into
      * a date "string" for the frontend, then back into a DateTime
      * object in the component.
-     *
-     * @LiveProp
      */
+    #[LiveProp]
     private \DateTimeInterface $created;
-
-    public static function getComponentName(): string
-    {
-        return 'date';
-    }
 
     public function mount(\DateTimeInterface $created = null): void
     {
