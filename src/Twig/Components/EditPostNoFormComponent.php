@@ -6,9 +6,9 @@ use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\LiveComponentInterface;
 use Symfony\UX\LiveComponent\ValidatableComponentTrait;
 
 /**
@@ -21,32 +21,23 @@ use Symfony\UX\LiveComponent\ValidatableComponentTrait;
  *
  * This also uses <code>data-loading="addClass()"</code> to give
  * the preview a low opacity while the component is loading.
- *
- *
  */
-final class EditPostNoFormComponent extends AbstractController implements LiveComponentInterface
+#[AsLiveComponent('edit_post_no_form')]
+final class EditPostNoFormComponent extends AbstractController
 {
     use ValidatableComponentTrait;
 
     /**
      * The Post itself cannot be changed, but the "title" and "content" properties
      * *can* be changed.
-     *
-     * @LiveProp(exposed={"title", "content"})
-     * @Assert\Valid()
      */
+    #[LiveProp(exposed: ['title', 'content'])]
+    #[Assert\Valid]
     public Post $post;
 
     public bool $isSaved = false;
 
-    public static function getComponentName(): string
-    {
-        return 'edit_post_no_form';
-    }
-
-    /**
-     * @LiveAction
-     */
+    #[LiveAction]
     public function save(EntityManagerInterface $entityManager)
     {
         $this->validate();

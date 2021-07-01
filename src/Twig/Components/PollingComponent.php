@@ -2,9 +2,10 @@
 
 namespace App\Twig\Components;
 
-use Symfony\UX\LiveComponent\LiveComponentInterface;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 
-class PollingComponent implements LiveComponentInterface
+#[AsLiveComponent('polling')]
+class PollingComponent
 {
     public $pollLength;
 
@@ -13,10 +14,5 @@ class PollingComponent implements LiveComponentInterface
         $now = \DateTimeImmutable::createFromFormat('U.u', microtime(true));
 
         return $now->format("m-d-Y H:i:s.u");
-    }
-
-    public static function getComponentName(): string
-    {
-        return 'polling';
     }
 }

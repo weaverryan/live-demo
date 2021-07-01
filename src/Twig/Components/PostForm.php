@@ -8,12 +8,13 @@ use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
-use Symfony\UX\LiveComponent\LiveComponentInterface;
 
-class PostForm extends AbstractController implements LiveComponentInterface
+#[AsLiveComponent('post_form')]
+class PostForm extends AbstractController
 {
     use ComponentWithFormTrait;
 
@@ -22,14 +23,11 @@ class PostForm extends AbstractController implements LiveComponentInterface
      *
      * Needed so that the same form can be re-created
      * when the component is re-rendered via Ajax.
-     *
-     * @LiveProp(fieldName="initialFormData")
      */
+    #[LiveProp(fieldName: 'initialFormData')]
     public ?Post $post = null;
 
-    /**
-     * @LiveProp()
-     */
+    #[LiveProp]
     public string $buttonLabel = 'Save';
 
     private PostRepository $postRepository;
@@ -65,9 +63,7 @@ class PostForm extends AbstractController implements LiveComponentInterface
         return sprintf('Try typing "%s" to trigger the UniqueEntity validator', $post->getSlug());
     }
 
-    /**
-     * @LiveAction()
-     */
+    #[LiveAction]
     public function save(EntityManagerInterface $entityManager)
     {
         $this->submitForm();
@@ -87,10 +83,5 @@ class PostForm extends AbstractController implements LiveComponentInterface
         return $this->redirectToRoute('app_post_show', [
             'id' => $this->post->getId(),
         ]);
-    }
-
-    public static function getComponentName(): string
-    {
-        return 'post_form';
     }
 }

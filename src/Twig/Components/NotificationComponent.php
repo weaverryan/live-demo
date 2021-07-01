@@ -4,9 +4,9 @@ namespace App\Twig\Components;
 
 use App\Entity\Notification;
 use App\Repository\NotificationRepository;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\LiveComponentInterface;
 
 /**
  * Polls the server to look for new notifications.
@@ -14,13 +14,12 @@ use Symfony\UX\LiveComponent\LiveComponentInterface;
  * Add new notifications by running <code>bin/console create:notification "You're message"</code>
  * or by using the <code>AddNotificationComponent</code> below.
  */
-final class NotificationComponent implements LiveComponentInterface
+#[AsLiveComponent('notification')]
+final class NotificationComponent
 {
     private NotificationRepository $repo;
 
-    /**
-     * @LiveProp
-     */
+    #[LiveProp]
     public bool $expanded = false;
 
     public function __construct(NotificationRepository $repo)
@@ -28,9 +27,7 @@ final class NotificationComponent implements LiveComponentInterface
         $this->repo = $repo;
     }
 
-    /**
-     * @LiveAction
-     */
+    #[LiveAction]
     public function toggle(): void
     {
         $this->expanded = !$this->expanded;
@@ -42,10 +39,5 @@ final class NotificationComponent implements LiveComponentInterface
     public function getNotifications(): array
     {
         return $this->repo->findAll();
-    }
-
-    public static function getComponentName(): string
-    {
-        return 'notification';
     }
 }

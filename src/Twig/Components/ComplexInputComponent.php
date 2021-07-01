@@ -2,9 +2,9 @@
 
 namespace App\Twig\Components;
 
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\PostHydrate;
-use Symfony\UX\LiveComponent\LiveComponentInterface;
 
 /**
  * An input field with a custom hydrator.
@@ -18,21 +18,16 @@ use Symfony\UX\LiveComponent\LiveComponentInterface;
  *
  * This also has a button where you can trigger a re-render manually.
  */
-final class ComplexInputComponent implements LiveComponentInterface
+#[AsLiveComponent('complex_input')]
+final class ComplexInputComponent
 {
-    /**
-     * @LiveProp(writable=true)
-     */
+    #[LiveProp(writable: true)]
     public string $value = '';
 
-    /**
-     * @LiveProp(hydrateWith="hydratePrefixer()", dehydrateWith="dehydratePrefixer")
-     */
+    #[LiveProp(hydrateWith: 'hydratePrefixer()', dehydrateWith: 'dehydratePrefixer')]
     public Prefixer $prefixer;
 
-    /**
-     * @LiveProp
-     */
+    #[LiveProp]
     public \DateTime $firstRenderedAt;
 
     public function mount(string $prefix): void
@@ -50,9 +45,8 @@ final class ComplexInputComponent implements LiveComponentInterface
      * property, but for security reasons, the user should only be
      * allowed to change to a subset of values (and you want to even
      * prevent the component from rendering with an invalid value).
-     *
-     * @PostHydrate()
      */
+    #[PostHydrate]
     public function postHydrate(): void
     {
         if ('invalid' === $this->value) {
@@ -76,10 +70,5 @@ final class ComplexInputComponent implements LiveComponentInterface
     public function dehydratePrefixer(): string
     {
         return $this->prefixer->prefix();
-    }
-
-    public static function getComponentName(): string
-    {
-        return 'complex_input';
     }
 }

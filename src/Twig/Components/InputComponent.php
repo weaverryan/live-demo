@@ -2,22 +2,18 @@
 
 namespace App\Twig\Components;
 
-use Symfony\UX\TwigComponent\ComponentInterface;
+use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 /**
  * A reusable component to render <code>input</code> elements.
  */
-final class InputComponent implements ComponentInterface
+#[AsTwigComponent('input')]
+final class InputComponent
 {
     public ?string $label = null;
     public ?string $value = null;
     public string $type = 'text';
     public array $errors = [];
-
-    public static function getComponentName(): string
-    {
-        return 'input';
-    }
 
     public function setErrors($errors): void
     {
