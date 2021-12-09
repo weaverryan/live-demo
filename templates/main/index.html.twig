@@ -8,7 +8,16 @@
 
     {% for example in get_examples() %}
         <div id="example-{{ example.componentName }}">
-            <h2><code>{{ example.shortClass }}</code></h2>
+            <h2>
+                <code>{{ example.shortClass }}</code>
+                {% if example.isLive %}
+                    <span
+                        class="badge bg-primary rounded-pill"
+                        style="font-size: 16px;"
+                        title="This component updates as your interact with it!"
+                    >LIVE</span>
+                {% endif %}
+            </h2>
             <div class="row">
                 <div class="col-4">
                     {{ include('examples/example_'~example.componentName~'.html.twig') }}

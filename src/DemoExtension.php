@@ -17,16 +17,19 @@ use Highlight\Highlighter;
 use phpDocumentor\Reflection\DocBlockFactory;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Symfony\UX\TwigComponent\ComponentFactory;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class DemoExtension extends AbstractExtension
 {
     private Highlighter $highlighter;
+    private ComponentFactory $componentFactory;
 
-    public function __construct(Highlighter $highlighter)
+    public function __construct(Highlighter $highlighter, ComponentFactory $componentFactory)
     {
         $this->highlighter = $highlighter;
+        $this->componentFactory = $componentFactory;
     }
 
     public function getFunctions()
@@ -92,7 +95,7 @@ class DemoExtension extends AbstractExtension
 
             $finalExamples[] = [
                 'class' => $example,
-                'componentName' => AsTwigComponent::forClass($example)->getName(),
+                'componentName' => $this->componentFactory->configFor($example)['name'],
                 'shortClass' => $reflectionClass->getShortName(),
                 'classSummary' => $docBlock ? $docBlock->getSummary() : '',
                 'classDescription' => $classDescription,
