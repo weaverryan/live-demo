@@ -8,6 +8,7 @@ use App\Twig\Components\ChangeableEditPostNoFormComponent;
 use App\Twig\Components\ComplexInputComponent;
 use App\Twig\Components\DateComponent;
 use App\Twig\Components\EditPostNoFormComponent;
+use App\Twig\Components\EditPostWithEmbeddedComponent;
 use App\Twig\Components\InputComponent;
 use App\Twig\Components\MarkdownInputComponent;
 use App\Twig\Components\NotificationComponent;
@@ -15,9 +16,7 @@ use App\Twig\Components\RegistrationFormComponent;
 use Highlight\Highlighter;
 use phpDocumentor\Reflection\DocBlockFactory;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
-use Symfony\UX\LiveComponent\LiveComponentInterface;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
-use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -71,10 +70,10 @@ class DemoExtension extends AbstractExtension
             ComplexInputComponent::class,
             EditPostNoFormComponent::class,
             ChangeableEditPostNoFormComponent::class,
-            NotificationComponent::class,
             AddNotificationComponent::class,
             DateComponent::class,
             MarkdownInputComponent::class,
+            EditPostWithEmbeddedComponent::class,
         ];
 
         return $this->prepareExamples($examples);

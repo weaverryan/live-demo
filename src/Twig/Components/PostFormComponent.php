@@ -14,7 +14,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 
 #[AsLiveComponent('post_form')]
-class PostForm extends AbstractController
+class PostFormComponent extends AbstractController
 {
     use ComponentWithFormTrait;
 

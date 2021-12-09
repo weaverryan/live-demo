@@ -1,5 +1,5 @@
 import { startStimulusApp } from '@symfony/stimulus-bridge';
-import LiveController from '@symfony/ux-live-component';
+import LiveController from '@symfony/ux-live-component/src/live_controller';
 import '@symfony/ux-live-component/styles/live.css';
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory

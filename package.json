@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "@hotwired/stimulus": "^3.0.0",
         "@symfony/stimulus-bridge": "^2.0.0",
         "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",
         "@symfony/webpack-encore": "^1.0.0",
