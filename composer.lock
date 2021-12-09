@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1206ca74e86730dd14572122ac3794f8",
+    "content-hash": "ced64abc6a7442956d11b46fc6422849",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -9243,10 +9243,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "symfony/ux-live-component": 20,
-        "symfony/ux-twig-component": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
