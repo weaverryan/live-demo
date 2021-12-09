@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\ValidatableComponentTrait;
 
 /**
@@ -25,6 +26,8 @@ use Symfony\UX\LiveComponent\ValidatableComponentTrait;
 #[AsLiveComponent('edit_post_no_form')]
 final class EditPostNoFormComponent extends AbstractController
 {
+    use DefaultActionTrait;
+
     use ValidatableComponentTrait;
 
     /**

@@ -7,6 +7,7 @@ use App\Repository\NotificationRepository;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 /**
  * Polls the server to look for new notifications.
@@ -17,6 +18,8 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 #[AsLiveComponent('notification')]
 final class NotificationComponent
 {
+    use DefaultActionTrait;
+
     private NotificationRepository $repo;
 
     #[LiveProp]

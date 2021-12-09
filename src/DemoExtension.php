@@ -73,10 +73,10 @@ class DemoExtension extends AbstractExtension
             ComplexInputComponent::class,
             EditPostNoFormComponent::class,
             ChangeableEditPostNoFormComponent::class,
+            NotificationComponent::class,
             AddNotificationComponent::class,
             DateComponent::class,
             MarkdownInputComponent::class,
-            EditPostWithEmbeddedComponent::class,
         ];
 
         return $this->prepareExamples($examples);

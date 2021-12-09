@@ -5,6 +5,7 @@ namespace App\Twig\Components;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\PostHydrate;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 /**
  * An input field with a custom hydrator.
@@ -21,6 +22,8 @@ use Symfony\UX\LiveComponent\Attribute\PostHydrate;
 #[AsLiveComponent('complex_input')]
 final class ComplexInputComponent
 {
+    use DefaultActionTrait;
+
     #[LiveProp(writable: true)]
     public string $value = '';
 

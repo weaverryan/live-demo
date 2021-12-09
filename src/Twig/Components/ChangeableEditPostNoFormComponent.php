@@ -5,11 +5,12 @@ namespace App\Twig\Components;
 use App\Entity\Post;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\PostHydrate;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 /**
  * Choose which Post you want to edit, then update its data in a form!
@@ -24,6 +25,8 @@ use Symfony\UX\LiveComponent\Attribute\PostHydrate;
 #[AsLiveComponent('changeable_edit_post_no_form')]
 final class ChangeableEditPostNoFormComponent
 {
+    use DefaultActionTrait;
+
     /**
      * The post itself is CHANGEABLE
      */
