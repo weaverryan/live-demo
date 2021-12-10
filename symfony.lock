@@ -1,4 +1,7 @@
 {
+    "dflydev/dot-access-data": {
+        "version": "v3.0.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -117,8 +120,17 @@
     "league/commonmark": {
         "version": "1.5.8"
     },
+    "league/config": {
+        "version": "v1.1.1"
+    },
     "monolog/monolog": {
         "version": "2.1.0"
+    },
+    "nette/schema": {
+        "version": "v1.2.2"
+    },
+    "nette/utils": {
+        "version": "v3.2.6"
     },
     "nikic/php-parser": {
         "version": "v4.5.0"
@@ -573,6 +585,9 @@
     },
     "webmozart/assert": {
         "version": "1.9.0"
+    },
+    "zenstruck/assert": {
+        "version": "v1.0.0"
     },
     "zenstruck/callback": {
         "version": "v1.2.0"

@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 /**
  * Adds a notification message.
@@ -19,6 +20,8 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 #[AsLiveComponent('add_notification')]
 final class AddNotificationComponent
 {
+    use DefaultActionTrait;
+
     #[LiveProp(writable: true)]
     public string $message = '';
 

@@ -9,10 +9,13 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent('form_markdown_textarea')]
 class FormMarkdownTextarea extends AbstractController
 {
+    use DefaultActionTrait;
+
     use ComponentWithFormTrait;
 
     /**
