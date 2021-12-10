@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Question\Question;
-use Symfony\UX\LiveComponent\LiveComponentInterface;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
@@ -47,7 +47,7 @@ final class MakeComponent extends AbstractMaker
         $name = $input->getArgument('name');
         $live = $input->getOption('live');
 
-        if ($live && !\interface_exists(LiveComponentInterface::class)) {
+        if ($live && !\class_exists(AsLiveComponent::class)) {
             throw new \RuntimeException('You must install symfony/ux-live-component to create a live component (composer require symfony/ux-live-component)');
         }
 
@@ -87,7 +87,7 @@ final class MakeComponent extends AbstractMaker
         $question->setValidator([Validator::class, 'notBlank']);
 
         $name = $io->askQuestion($question);
-        $live = $io->confirm('Make this a live component?', \interface_exists(LiveComponentInterface::class));
+        $live = $io->confirm('Make this a live component?', \class_exists(AsLiveComponent::class));
 
         $input->setArgument('name', $name);
         $input->setOption('live', $live);
