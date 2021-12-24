@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
+    }
+
     /**
      * @Route("/admin/post", name="app_post_index")
      */
@@ -37,9 +42,8 @@ class PostController extends AbstractController
         }
 
         if ($form && $form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($post);
-            $entityManager->flush();
+            $this->entityManager->persist($post);
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('app_post_index');
         }
@@ -73,7 +77,7 @@ class PostController extends AbstractController
         }
 
         if ($form && $form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('app_post_index');
         }
@@ -90,9 +94,8 @@ class PostController extends AbstractController
     public function delete(Request $request, Post $post): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($post);
-            $entityManager->flush();
+            $this->entityManager->remove($post);
+            $this->entityManager->flush();
         }
 
         return $this->redirectToRoute('app_post_index');
