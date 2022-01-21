@@ -435,6 +435,9 @@
             "config/routes.yaml"
         ]
     },
+    "symfony/runtime": {
+        "version": "v6.0.0"
+    },
     "symfony/security-bundle": {
         "version": "6.0",
         "recipe": {
