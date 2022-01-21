@@ -8,7 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         PostFactory::createOne([
             'content' => 'This content uses **markdown** inside!'
