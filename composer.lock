@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "331b6ae87abd415de4fc16078dc03faf",
+    "content-hash": "636203f4c6f92693260be45d526aad1b",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -7282,16 +7282,16 @@
         },
         {
             "name": "symfony/ux-live-component",
-            "version": "v2.0.1",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-live-component.git",
-                "reference": "471b423cfa020430e4b0cf5f9e6c9c534cfcebba"
+                "reference": "0195df8cc817b7847798d6d0656253359817b42f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/471b423cfa020430e4b0cf5f9e6c9c534cfcebba",
-                "reference": "471b423cfa020430e4b0cf5f9e6c9c534cfcebba",
+                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/0195df8cc817b7847798d6d0656253359817b42f",
+                "reference": "0195df8cc817b7847798d6d0656253359817b42f",
                 "shasum": ""
             },
             "require": {
@@ -7312,6 +7312,7 @@
                 "zenstruck/browser": "^0.9.1",
                 "zenstruck/foundry": "^1.10"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "thanks": {
@@ -7342,7 +7343,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-live-component/tree/v2.0.1"
+                "source": "https://github.com/symfony/ux-live-component/tree/2.x"
             },
             "funding": [
                 {
@@ -7358,20 +7359,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-09T14:02:21+00:00"
+            "time": "2022-01-21T15:18:20+00:00"
         },
         {
             "name": "symfony/ux-twig-component",
-            "version": "v2.0.1",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-twig-component.git",
-                "reference": "bbfb4a3f1a2ff1f707c1eb953af6d466eafbdf47"
+                "reference": "d3fb7edfe83a7a6fdc3c1d498ed81f05e2c435c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/bbfb4a3f1a2ff1f707c1eb953af6d466eafbdf47",
-                "reference": "bbfb4a3f1a2ff1f707c1eb953af6d466eafbdf47",
+                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/d3fb7edfe83a7a6fdc3c1d498ed81f05e2c435c3",
+                "reference": "d3fb7edfe83a7a6fdc3c1d498ed81f05e2c435c3",
                 "shasum": ""
             },
             "require": {
@@ -7388,6 +7389,7 @@
                 "symfony/phpunit-bridge": "^5.2|^6.0",
                 "symfony/twig-bundle": "^4.4|^5.0|^6.0"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "thanks": {
@@ -7418,7 +7420,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-twig-component/tree/v2.0.1"
+                "source": "https://github.com/symfony/ux-twig-component/tree/2.x"
             },
             "funding": [
                 {
@@ -7434,7 +7436,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-03T21:37:12+00:00"
+            "time": "2022-01-21T15:56:57+00:00"
         },
         {
             "name": "symfony/validator",
@@ -9325,7 +9327,10 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "symfony/ux-live-component": 20,
+        "symfony/ux-twig-component": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
