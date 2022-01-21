@@ -592,12 +592,12 @@
         "version": "v1.2.0"
     },
     "zenstruck/foundry": {
-        "version": "1.9",
+        "version": "1.16",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "1.9",
-            "ref": "e03ffeeb52fd76e99f2c527ecddc9c986cb194e5"
+            "ref": "4105965892040697deb766a89e518eddc8d207e1"
         },
         "files": [
             "config/packages/dev/zenstruck_foundry.yaml",
