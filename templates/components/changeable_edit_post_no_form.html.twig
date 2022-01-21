@@ -11,7 +11,7 @@
             {% for otherPost in this.allPosts %}
                 <option
                     value="{{ otherPost.id }}"
-                    {{ this.post and otherPost.id == this.post.id ? 'selected': '' }}
+                    {{ post and otherPost.id == post.id ? 'selected': '' }}
                 >{{ otherPost.title }} (id {{ otherPost.id }})</option>
             {% endfor %}
         </select>
@@ -39,7 +39,7 @@
                     class="form-control"
                     data-model="post.title"
                     data-action="live#updateDefer"
-                    value="{{ this.post.title }}"
+                    value="{{ post.title }}"
                 >
             </div>
 
@@ -50,12 +50,12 @@
                     class="form-control"
                     data-model="post.content"
                     data-action="live#updateDefer"
-                >{{ this.post.content }}</textarea>
+                >{{ post.content }}</textarea>
             </div>
 
-            {% if this.isSaved %}
+            {% if isSaved %}
                 {{ component('alert', {
-                    'message': 'Post id '~this.post.id~' saved!'
+                    'message': 'Post id '~post.id~' saved!'
                 }) }}
             {% endif %}
 

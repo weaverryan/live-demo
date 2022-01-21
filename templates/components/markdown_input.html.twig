@@ -1,15 +1,15 @@
 <div {{ init_live_component(this) }}>
     <div class="mb-3">
-        <label class="form-label" for="markdown-input">{{ this.label }}</label>
+        <label class="form-label" for="markdown-input">{{ label }}</label>
 
         <textarea
-            name="{{ this.name }}"
+            name="{{ name }}"
             data-model="value"
             data-action="live#update"
             rows="{{ this.rows }}"
             class="form-control{{ this.getError('value') ? ' is-invalid' : '' }}"
             id="markdown-input"
-        >{{- this.value -}}</textarea>
+        >{{- value -}}</textarea>
 
         {% if this.getError('value') %}
             <div class="invalid-feedback">
@@ -39,7 +39,7 @@
         class="markdown-preview"
         data-loading="addClass(low-opacity bg-maroon)"
     >
-        {{ this.value|markdown_to_html }}
+        {{ value|markdown_to_html }}
     </div>
 
 </div>

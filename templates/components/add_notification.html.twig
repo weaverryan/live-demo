@@ -8,7 +8,7 @@
         <input
             class="form-control"
             type="text"
-            value="{{ this.message }}"
+            value="{{ message }}"
             data-model="message"
             data-action="live#updateDefer"
             data-loading="delay|addAttribute(disabled)"
@@ -22,7 +22,7 @@
         </button>
     </div>
 
-    {% if this.messageAdded %}
+    {% if messageAdded %}
         {{ component('alert', { message: 'Notification Added!' }) }}
     {% endif %}
 </form>

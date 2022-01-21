@@ -3,7 +3,7 @@
         <input
             class="form-control"
             type="text"
-            value="{{ this.value }}"
+            value="{{ value }}"
             data-model="value"
             data-action="live#update"
         />
@@ -12,7 +12,7 @@
         {{ this.prefixedValue }}
     </div>
 
-    First rendered: {{ this.firstRenderedAt.format('H:i:s') }} <br>
+    First rendered: {{ firstRenderedAt.format('H:i:s') }} <br>
     Last rendered: {{ date().format('H:i:s') }}
 
     <div>

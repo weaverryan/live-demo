@@ -8,23 +8,23 @@
     #}
     data-action="change->live#update"
 >
-    {{ form_start(this.form) }}
-        {{ form_row(this.form.title) }}
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
 
-        {{ form_row(this.form.slug, {
-            help: 'If blank, this will be auto-generated.'~this.alreadyUsedSlugMessage
+        {{ form_row(form.slug, {
+            help: 'If blank, this will be auto-generated.'~alreadyUsedSlugMessage
         }) }}
 
         {{ component('form_markdown_textarea', {
-            form: this.form,
-            post: this.post
+            form: form,
+            post: post
         }) }}
 
         <button
             class="btn btn-primary"
             data-loading="addAttribute(disabled)"
             formnovalidate
-        >{{ this.buttonLabel }}</button>
+        >{{ buttonLabel }}</button>
 
         <button
             type="button"
@@ -33,5 +33,5 @@
             data-action-name="prevent|save"
             data-loading="addAttribute(disabled)"
         >Submit via live action</button>
-    {{ form_end(this.form) }}
+    {{ form_end(form) }}
 </div>
