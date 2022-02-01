@@ -1,6 +1,7 @@
 @import "~bootstrap";
 @import '../../vendor/scrivo/highlight.php/styles/default.css';
 @import '../../vendor/scrivo/highlight.php/styles/night-owl.css';
+@import '~@fortawesome/fontawesome-free/css/all.css';
 
 .markdown-preview {
     padding: 30px;

@@ -5,6 +5,7 @@ namespace App;
 use App\Twig\Components\AddNotificationComponent;
 use App\Twig\Components\AlertComponent;
 use App\Twig\Components\ChangeableEditPostNoFormComponent;
+use App\Twig\Components\CollectionTypeFormComponent;
 use App\Twig\Components\ComplexInputComponent;
 use App\Twig\Components\DateComponent;
 use App\Twig\Components\EditPostNoFormComponent;
@@ -70,6 +71,7 @@ class DemoExtension extends AbstractExtension
             AlertComponent::class,
             InputComponent::class,
             RegistrationFormComponent::class,
+            CollectionTypeFormComponent::class,
             ComplexInputComponent::class,
             EditPostNoFormComponent::class,
             ChangeableEditPostNoFormComponent::class,
@@ -92,10 +94,11 @@ class DemoExtension extends AbstractExtension
             $docBlock = $reflectionClass->getDocComment() ? $docBlockFactory->create($reflectionClass->getDocComment()) : null;
             $classDescription = $docBlock ? $docBlock->getDescription() : '';
             $classDescription = str_replace("\n\n", '<br><br>', $classDescription);
+            $name = $this->getComponentName($example);
 
             $finalExamples[] = [
                 'class' => $example,
-                'componentName' => $this->componentFactory->configFor($example)['name'],
+                'componentName' => $name,
                 'shortClass' => $reflectionClass->getShortName(),
                 'classSummary' => $docBlock ? $docBlock->getSummary() : '',
                 'classDescription' => $classDescription,
@@ -104,5 +107,13 @@ class DemoExtension extends AbstractExtension
         }
 
         return $finalExamples;
+    }
+
+    private function getComponentName(string $componentClass): string
+    {
+        $class = new \ReflectionClass($componentClass);
+        $attributes = $class->getAttributes(AsTwigComponent::class, \ReflectionAttribute::IS_INSTANCEOF);
+
+        return $attributes[0]->getArguments()[0];
     }
 }
