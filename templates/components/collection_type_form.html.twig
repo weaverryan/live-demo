@@ -1,6 +1,4 @@
-<div{{ attributes }}
-    data-action="change->live#update"
->
+<div{{ attributes }} data-action="change->live#update">
     {{ form_start(this.form, {
         action: post ? path('app_post_sources_edit', { id: post.id }) : path('app_post_sources_new'),
     }) }}
@@ -10,7 +8,7 @@
         <h3>Sources:</h3>
         <div class="row">
         {% for key, postForm in this.form.postSources %}
-            <div class="col-4">
+            <div class="col-6">
                 <div style="border: 1px dashed #efefef; position: relative;" class="p-1 mb-1">
                     <button
                         data-action="live#action"

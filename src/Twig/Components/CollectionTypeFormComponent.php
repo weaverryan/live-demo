@@ -16,7 +16,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 /**
  * Renders an embedded array of forms via CollectionType
  *
- * This is a LIVE component: click the "+" or "-" buttons
+ * This is a LIVE component: click "+ Add Source" or "X"
  * to trigger a server-side update, which adds/removes the
  * embedded form.
  */

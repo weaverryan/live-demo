@@ -1,5 +1,4 @@
-<div
-    {{ init_live_component(this) }}
+<div{{ attributes }}>
     {% if pollLength %}
         data-poll="delay({{ pollLength }})|$render"
     {% else %}
