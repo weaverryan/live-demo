@@ -1,5 +1,5 @@
 <div{{ attributes }}>
-    {{ form_row(form.content, {
+    {{ form_row(this.form.content, {
         attr: {
             'data-action': 'live#updateDefer',
         },
@@ -7,6 +7,6 @@
     }) }}
 
     <div class="markdown-preview">
-        {{ field_value(form.content)|markdown_to_html }}
+        {{ field_value(this.form.content)|markdown_to_html }}
     </div>
 </div>

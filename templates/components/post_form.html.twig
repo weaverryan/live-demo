@@ -1,4 +1,4 @@
-<div{{ attributes }}>
+<div{{ attributes }}
     {#
         Automatically catch all "change" events from the fields
         below and re-render the component.
@@ -7,15 +7,15 @@
     #}
     data-action="change->live#update"
 >
-    {{ form_start(form) }}
-        {{ form_row(form.title) }}
+    {{ form_start(this.form) }}
+        {{ form_row(this.form.title) }}
 
-        {{ form_row(form.slug, {
-            help: 'If blank, this will be auto-generated.'~alreadyUsedSlugMessage
+        {{ form_row(this.form.slug, {
+            help: 'If blank, this will be auto-generated.'~this.alreadyUsedSlugMessage
         }) }}
 
         {{ component('form_markdown_textarea', {
-            form: form,
+            form: this.form,
             post: post
         }) }}
 
@@ -32,5 +32,5 @@
             data-action-name="prevent|save"
             data-loading="addAttribute(disabled)"
         >Submit via live action</button>
-    {{ form_end(form) }}
+    {{ form_end(this.form) }}
 </div>
