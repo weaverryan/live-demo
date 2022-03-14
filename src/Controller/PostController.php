@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Form\PostWithSourcesType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -99,5 +100,31 @@ class PostController extends AbstractController
         }
 
         return $this->redirectToRoute('app_post_index');
+    }
+
+    #[Route('/admin/post/sources/new', name: 'app_post_sources_new')]
+    #[Route('/admin/post/sources/{id}', name: 'app_post_sources_edit')]
+    public function postWithSources(Request $request, Post $post = null): Response
+    {
+        // showing off how you could actually avoid creating the Form object on GET
+        $form = null;
+        if ($request->isMethod('POST')) {
+            $form = $this->createForm(PostWithSourcesType::class, $post);
+            $form->handleRequest($request);
+        }
+
+        if ($form && $form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($post);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_post_sources_edit', [
+                'id' => $post->getId(),
+            ]);
+        }
+
+        return $this->renderForm('post/form_with_sources.html.twig', [
+            'post' => $post,
+            'form' => $form,
+        ]);
     }
 }

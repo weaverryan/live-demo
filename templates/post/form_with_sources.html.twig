@@ -1,9 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Post{% endblock %}
+{% block title %}Post with Sources{% endblock %}
 
 {% block body %}
-    <h1>Create new Post</h1>
+    <h1>{{ post ? 'Edit' : 'Create new' }} Post (with sources)</h1>
+
+    <blockquote>
+        This shows off a CollectionType and how a live component can
+        be used to add and remove items.
+    </blockquote>
 
     {#
         We're passing in "form", which is optional.
@@ -12,8 +17,9 @@
         component will re-use the submitted form instead
         of creating a new form with no submitted data.
     #}
-    {{ component('post_form', {
-        form: form
+    {{ component('collection_type_form', {
+        form: form,
+        post: post
     }) }}
 
     <a href="{{ path('app_post_index') }}">back to list</a>

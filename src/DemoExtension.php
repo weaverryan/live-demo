@@ -5,10 +5,10 @@ namespace App;
 use App\Twig\Components\AddNotificationComponent;
 use App\Twig\Components\AlertComponent;
 use App\Twig\Components\ChangeableEditPostNoFormComponent;
+use App\Twig\Components\CollectionTypeFormComponent;
 use App\Twig\Components\ComplexInputComponent;
 use App\Twig\Components\DateComponent;
 use App\Twig\Components\EditPostNoFormComponent;
-use App\Twig\Components\EditPostWithEmbeddedComponent;
 use App\Twig\Components\InputComponent;
 use App\Twig\Components\MarkdownInputComponent;
 use App\Twig\Components\NotificationComponent;
@@ -23,13 +23,10 @@ use Twig\TwigFunction;
 
 class DemoExtension extends AbstractExtension
 {
-    private Highlighter $highlighter;
-    private ComponentFactory $componentFactory;
-
-    public function __construct(Highlighter $highlighter, ComponentFactory $componentFactory)
+    public function __construct(private Highlighter $highlighter, private ExampleHelper $exampleHelper)
     {
         $this->highlighter = $highlighter;
-        $this->componentFactory = $componentFactory;
+        $this->exampleHelper = $exampleHelper;
     }
 
     public function getFunctions()
@@ -42,7 +39,12 @@ class DemoExtension extends AbstractExtension
         ];
     }
 
-    public function getComponentSource(string $componentClass)
+    public function getExamples(): array
+    {
+        return $this->exampleHelper->getExamples();
+    }
+
+    public function getComponentSource(string $componentClass): string
     {
         $reflection = new \ReflectionClass($componentClass);
         $source = file_get_contents($reflection->getFileName());
@@ -50,59 +52,17 @@ class DemoExtension extends AbstractExtension
         return $this->highlighter->highlight('php', $source)->value;
     }
 
-    public function getComponentTemplate(string $name)
+    public function getComponentTemplate(string $name): string
     {
         $source = file_get_contents(sprintf(__DIR__.'/../templates/components/%s.html.twig', $name));
 
         return $this->highlighter->highlight('twig', $source)->value;
     }
 
-    public function renderComponentExampleSource(string $name)
+    public function renderComponentExampleSource(string $name): string
     {
         $source = file_get_contents(sprintf(__DIR__.'/../templates/examples/example_%s.html.twig', $name));
 
         return $this->highlighter->highlight('twig', $source)->value;
-    }
-
-    public function getExamples(): array
-    {
-        $examples = [
-            AlertComponent::class,
-            InputComponent::class,
-            RegistrationFormComponent::class,
-            ComplexInputComponent::class,
-            EditPostNoFormComponent::class,
-            ChangeableEditPostNoFormComponent::class,
-            NotificationComponent::class,
-            AddNotificationComponent::class,
-            DateComponent::class,
-            MarkdownInputComponent::class,
-        ];
-
-        return $this->prepareExamples($examples);
-    }
-
-    private function prepareExamples(array $examples)
-    {
-        $docBlockFactory = DocBlockFactory::createInstance();
-
-        $finalExamples = [];
-        foreach ($examples as $example) {
-            $reflectionClass = new \ReflectionClass($example);
-            $docBlock = $reflectionClass->getDocComment() ? $docBlockFactory->create($reflectionClass->getDocComment()) : null;
-            $classDescription = $docBlock ? $docBlock->getDescription() : '';
-            $classDescription = str_replace("\n\n", '<br><br>', $classDescription);
-
-            $finalExamples[] = [
-                'class' => $example,
-                'componentName' => $this->componentFactory->configFor($example)['name'],
-                'shortClass' => $reflectionClass->getShortName(),
-                'classSummary' => $docBlock ? $docBlock->getSummary() : '',
-                'classDescription' => $classDescription,
-                'isLive' => !empty($reflectionClass->getAttributes(AsLiveComponent::class)),
-            ];
-        }
-
-        return $finalExamples;
     }
 }

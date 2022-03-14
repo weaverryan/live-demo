@@ -1,5 +1,4 @@
-<div
-    {{ init_live_component(this) }}
+<div{{ attributes }}
     data-poll
 >
     Notifications ({{ this.notifications|length }})
@@ -9,9 +8,9 @@
         data-action="live#action"
         data-action-name="prevent|toggle"
     >
-        {% if this.expanded %}Hide{% else %}Show{% endif %}
+        {% if expanded %}Hide{% else %}Show{% endif %}
     </a>
-    {% if this.expanded %}
+    {% if expanded %}
         {% if this.notifications|length %}
             <ul>
                 {% for notification in this.notifications %}

@@ -1,5 +1,4 @@
-<div
-    {{ init_live_component(this) }}
+<div{{ attributes }}
     {#
         Automatically catch all "change" events from the fields
         below and re-render the component.
@@ -17,14 +16,14 @@
 
         {{ component('form_markdown_textarea', {
             form: this.form,
-            post: this.post
+            post: post
         }) }}
 
         <button
             class="btn btn-primary"
             data-loading="addAttribute(disabled)"
             formnovalidate
-        >{{ this.buttonLabel }}</button>
+        >{{ buttonLabel }}</button>
 
         <button
             type="button"

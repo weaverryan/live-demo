@@ -29,8 +29,25 @@
                 <td>{{ post.content }}</td>
                 <td>{{ post.slug }}</td>
                 <td>
-                    <a href="{{ path('app_post_show', {'id': post.id}) }}">show</a>
-                    <a href="{{ path('app_post_edit', {'id': post.id}) }}">edit</a>
+                    <div class="dropdown" {{ stimulus_controller('dropdown') }}>
+                        <button class="btn btn-secondary dropdown-toggle"
+                                type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </button>
+                        <ul class="dropdown-menu"
+                            aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_post_edit', {'id': post.id}) }}">Edit</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_post_sources_edit', {'id': post.id}) }}">Edit with "sources"</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_post_show', {'id': post.id}) }}">Show</a>
+                            </li>
+                        </ul>
+                    </div>
                 </td>
             </tr>
         {% else %}

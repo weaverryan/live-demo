@@ -1,0 +1,38 @@
+<div{{ attributes }} data-action="change->live#update">
+    {{ form_start(this.form, {
+        action: post ? path('app_post_sources_edit', { id: post.id }) : path('app_post_sources_new'),
+    }) }}
+        {{ form_row(this.form.title) }}
+        {{ form_row(this.form.content) }}
+
+        <h3>Sources:</h3>
+        <div class="row">
+        {% for key, postForm in this.form.postSources %}
+            <div class="col-6">
+                <div style="border: 1px dashed #efefef; position: relative;" class="p-1 mb-1">
+                    <button
+                        data-action="live#action"
+                        data-action-name="removeSource(index={{ key }})"
+                        type="button"
+                        class="btn btn-outline btn-sm"
+                        style="position: absolute; top: 0; right: 0;"
+                    ><span class="fa fa-times"></span></button>
+
+                    {{ form_widget(postForm) }}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+
+        {# avoid an extra label for this field #}
+        {% do this.form.postSources.setRendered %}
+        <button
+            data-action="live#action"
+            data-action-name="addSource"
+            type="button"
+            class="btn btn-secondary"
+        ><span class="fa fa-plus"></span> Add Source</button>
+
+        <button type="submit" class="btn btn-primary" formnovalidate>{{ post ? 'Update' : 'Create'}} Post</button>
+    {{ form_end(this.form) }}
+</div>

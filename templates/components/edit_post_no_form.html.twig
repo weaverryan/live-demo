@@ -1,6 +1,6 @@
-<div {{ init_live_component(this) }}>
+<div{{ attributes }}>
     <div>
-        Post Id: {{ this.post.id }}<br>
+        Post Id: {{ post.id }}<br>
 
         <div class="mb-3">
             <label for="edit_post_title" class="form-label">Title</label>
@@ -10,7 +10,7 @@
                     data-model="post.title"
                     data-action="blur->live#update"
                     class="form-control {{ this.getError('post.title') ? 'is-invalid' : '' }}"
-                    value="{{ this.post.title }}"
+                    value="{{ post.title }}"
                     id="edit_post_title"
                 >
                 {% if this.getError('post.title') %}
@@ -30,7 +30,7 @@
                     class="form-control {{ this.getError('post.content') ? 'is-invalid' : '' }}"
                     style="width: 300px; height: 100px;"
                     id="edit_post_content"
-                >{{ this.post.content }}</textarea>
+                >{{ post.content }}</textarea>
 
                 {% if this.getError('post.content') %}
                     <div class="invalid-feedback">
@@ -44,11 +44,11 @@
     </div>
 
     <div class="markdown-preview mb-3" data-loading="addClass(low-opacity)">
-        <h3>{{ this.post.title }}</h3>
-        {{ this.post.content|markdown_to_html }}
+        <h3>{{ post.title }}</h3>
+        {{ post.content|markdown_to_html }}
     </div>
 
-    {% if this.isSaved %}
+    {% if isSaved %}
         <div class="alert alert-success">Saved!</div>
     {% endif %}
 

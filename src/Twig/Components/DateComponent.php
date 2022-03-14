@@ -20,20 +20,10 @@ final class DateComponent
      * object in the component.
      */
     #[LiveProp]
-    private \DateTimeInterface $created;
+    public \DateTimeInterface $created;
 
     public function mount(\DateTimeInterface $created = null): void
     {
         $this->created = $created ?? new \DateTime('now');
-    }
-
-    public function getCreated(): \DateTimeInterface
-    {
-        return $this->created;
-    }
-
-    public function setCreated(\DateTimeInterface $created): void
-    {
-        $this->created = $created;
     }
 }

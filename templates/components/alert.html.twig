@@ -1,7 +1,7 @@
-<div class="alert alert-{{ this.type }}">
-    {% if this.escape %}
-        {{ this.message }}
+<div class="alert alert-{{ type }}">
+    {% if escape %}
+        {{ message }}
     {% else %}
-        {{ this.message|raw }}
+        {{ message|raw }}
     {% endif %}
 </div>

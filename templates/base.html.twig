@@ -24,7 +24,9 @@
                             <li
                                 class="nav-item nav-item-example mb-2"
                             >
-                                <a href="{{ path('app_homepage') }}#example-{{ example.componentName }}" class="nav-link px-1 align-middle">
+                                <a href="{{ path('app_example', {
+                                    example: example.componentName
+                                }) }}" class="nav-link px-1 align-middle">
                                     <div><code style="word-break: break-word">{{ example.shortClass }}</code></div>
                                     {% if example.isLive %}
                                         <span class="badge bg-primary rounded-pill" title="This component updates as your interact with it!">LIVE</span>
