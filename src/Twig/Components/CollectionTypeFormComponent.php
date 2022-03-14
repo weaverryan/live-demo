@@ -31,7 +31,6 @@ class CollectionTypeFormComponent extends AbstractController
 
     protected function instantiateForm(): FormInterface
     {
-        // TODO: fix losing full validation
         return $this->createForm(PostWithSourcesType::class, $this->post);
     }
 

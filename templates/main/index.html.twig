@@ -6,51 +6,20 @@
     <h1>Twig & Live Component Examples</h1>
     <hr>
 
+    <div class="row">
     {% for example in get_examples() %}
-        <div id="example-{{ example.componentName }}">
-            <h2>
-                <code>{{ example.shortClass }}</code>
+        <div class="col-4">
+            <a href="{{ path('app_example', {
+                example: example.componentName
+            }) }}" class="nav-link px-1 align-middle">
+                <div><code style="word-break: break-word">{{ example.shortClass }}</code></div>
                 {% if example.isLive %}
-                    <span
-                        class="badge bg-primary rounded-pill"
-                        style="font-size: 16px;"
-                        title="This component updates as your interact with it!"
-                    >LIVE</span>
+                    <span class="badge bg-primary rounded-pill" title="This component updates as your interact with it!">LIVE</span>
                 {% endif %}
-            </h2>
-            <div class="row">
-                <div class="col-6">
-                    {{ include('examples/example_'~example.componentName~'.html.twig') }}
-                </div>
-                <div class="col-5">
-                    <p>
-                        {{ example.classSummary|raw }}
-                    </p>
 
-                    <p>
-                        {{ example.classDescription|raw }}
-                    </p>
-
-                    <details>
-                        <summary><code>{{ example.shortClass }}.php</code></summary>
-
-                        <pre><code class="hljs php">{{ example_component_source(example.class) }}</code></pre>
-                    </details>
-
-                    <details>
-                        <summary><code>{{ example.componentName }}.html.twig</code></summary>
-
-                        <pre><code class="hljs twig">{{ example_component_template(example.componentName) }}</code></pre>
-                    </details>
-
-                    <div>
-                        Usage
-                        <pre><code class="hljs twig">{{ example_include_example_source(example.componentName) }}</code></pre>
-                    </div>
-                </div>
-            </div>
+                <small class="mb-1">{{ example.classSummary|raw }}</small>
+            </a>
         </div>
-
-        <hr>
     {% endfor %}
+    </div>
 {% endblock %}
