@@ -31,4 +31,19 @@ class PostRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
+
+    public function search(string $query): array
+    {
+        if (empty($query)) {
+            return [];
+        }
+
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.title LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
