@@ -13,6 +13,7 @@ use App\Twig\Components\InputComponent;
 use App\Twig\Components\MarkdownInputComponent;
 use App\Twig\Components\NotificationComponent;
 use App\Twig\Components\RegistrationFormComponent;
+use App\Twig\Components\SearchPostComponent;
 use phpDocumentor\Reflection\DocBlockFactory;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
@@ -33,6 +34,7 @@ class ExampleHelper
             AddNotificationComponent::class,
             DateComponent::class,
             MarkdownInputComponent::class,
+            SearchPostComponent::class,
         ];
 
         return $this->prepareExamples($examples);
